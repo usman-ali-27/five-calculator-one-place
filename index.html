@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five Calculator One Place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="orb orb-a" aria-hidden="true"></div>
+    <div class="orb orb-b" aria-hidden="true"></div>
+    <div class="orb orb-c" aria-hidden="true"></div>
+
+    <div class="app">
+      <header class="hero">
+        <p class="eyebrow">Five tools · one calm workspace</p>
+        <h1>Five Calculator One Place</h1>
+        <p class="lede">
+          General, scientific, BMI, age, and loan EMI — designed as one elegant suite.
+        </p>
+      </header>
+
+      <nav class="tabs" aria-label="Calculator types">
+        <button class="tab is-active" data-tab="general" type="button">General</button>
+        <button class="tab" data-tab="scientific" type="button">Scientific</button>
+        <button class="tab" data-tab="bmi" type="button">BMI</button>
+        <button class="tab" data-tab="age" type="button">Age</button>
+        <button class="tab" data-tab="loan" type="button">Loan / EMI</button>
+      </nav>
+
+      <main>
+        <section class="panel is-active" id="panel-general" data-panel="general">
+          <article class="glass calc-shell">
+            <div class="calc-top">
+              <span class="chip">Everyday math</span>
+              <p class="expr" id="gen-expr" aria-live="polite"></p>
+              <p class="result" id="gen-result">0</p>
+            </div>
+            <div class="keys keys-general" id="general-keys"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="panel-scientific" data-panel="scientific" hidden>
+          <article class="glass calc-shell scientific">
+            <div class="calc-top">
+              <div class="calc-top-row">
+                <span class="chip">Advanced</span>
+                <button class="mode-toggle" id="angle-mode" type="button" aria-pressed="true">DEG</button>
+              </div>
+              <p class="expr" id="sci-expr" aria-live="polite"></p>
+              <p class="result" id="sci-result">0</p>
+            </div>
+            <div class="keys keys-scientific" id="scientific-keys"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="panel-bmi" data-panel="bmi" hidden>
+          <article class="glass form-card">
+            <div class="form-head">
+              <span class="chip">Health</span>
+              <h2>BMI calculator</h2>
+              <p>See where you sit on a quiet, readable scale.</p>
+            </div>
+            <form id="bmi-form" class="fields">
+              <div class="field-row">
+                <label>
+                  Height
+                  <input id="bmi-height" type="number" min="1" step="any" value="170" required />
+                </label>
+                <label class="unit">
+                  Unit
+                  <select id="bmi-height-unit">
+                    <option value="cm">cm</option>
+                    <option value="in">inches</option>
+                  </select>
+                </label>
+              </div>
+              <div class="field-row">
+                <label>
+                  Weight
+                  <input id="bmi-weight" type="number" min="1" step="any" value="68" required />
+                </label>
+                <label class="unit">
+                  Unit
+                  <select id="bmi-weight-unit">
+                    <option value="kg">kg</option>
+                    <option value="lb">lb</option>
+                  </select>
+                </label>
+              </div>
+              <button class="primary" type="submit">Calculate BMI</button>
+            </form>
+            <div class="outcome" id="bmi-out">
+              <div class="bmi-score">
+                <strong id="bmi-value">—</strong>
+                <span id="bmi-label">Enter your details</span>
+              </div>
+              <div class="bmi-track" aria-hidden="true">
+                <div class="bmi-marker" id="bmi-marker"></div>
+              </div>
+              <ul class="legend">
+                <li><i class="swatch under"></i> Underweight &lt; 18.5</li>
+                <li><i class="swatch normal"></i> Normal 18.5–24.9</li>
+                <li><i class="swatch over"></i> Overweight 25–29.9</li>
+                <li><i class="swatch obese"></i> Obese 30+</li>
+              </ul>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" id="panel-age" data-panel="age" hidden>
+          <article class="glass form-card">
+            <div class="form-head">
+              <span class="chip">Time</span>
+              <h2>Age calculator</h2>
+              <p>Exact years, months, and days — plus your next birthday.</p>
+            </div>
+            <form id="age-form" class="fields">
+              <label>
+                Date of birth
+                <input id="age-dob" type="date" required />
+              </label>
+              <label>
+                Age as of
+                <input id="age-asof" type="date" required />
+              </label>
+              <button class="primary" type="submit">Calculate age</button>
+            </form>
+            <div class="stat-grid" id="age-out">
+              <div class="stat">
+                <span>Years</span>
+                <strong id="age-y">—</strong>
+              </div>
+              <div class="stat">
+                <span>Months</span>
+                <strong id="age-m">—</strong>
+              </div>
+              <div class="stat">
+                <span>Days</span>
+                <strong id="age-d">—</strong>
+              </div>
+              <div class="stat wide">
+                <span>Next birthday</span>
+                <strong id="age-next">—</strong>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel" id="panel-loan" data-panel="loan" hidden>
+          <article class="glass form-card">
+            <div class="form-head">
+              <span class="chip">Finance</span>
+              <h2>Loan / EMI calculator</h2>
+              <p>Monthly payment, interest, and total cost at a glance.</p>
+            </div>
+            <form id="loan-form" class="fields">
+              <label>
+                Loan amount
+                <input id="loan-principal" type="number" min="1" step="any" value="500000" required />
+              </label>
+              <label>
+                Annual interest (%)
+                <input id="loan-rate" type="number" min="0" step="any" value="8.5" required />
+              </label>
+              <div class="field-row">
+                <label>
+                  Tenure
+                  <input id="loan-tenure" type="number" min="1" step="1" value="20" required />
+                </label>
+                <label class="unit">
+                  Period
+                  <select id="loan-tenure-unit">
+                    <option value="years">Years</option>
+                    <option value="months">Months</option>
+                  </select>
+                </label>
+              </div>
+              <button class="primary" type="submit">Calculate EMI</button>
+            </form>
+            <div class="stat-grid" id="loan-out">
+              <div class="stat wide highlight">
+                <span>Monthly EMI</span>
+                <strong id="loan-emi">—</strong>
+              </div>
+              <div class="stat">
+                <span>Total interest</span>
+                <strong id="loan-interest">—</strong>
+              </div>
+              <div class="stat">
+                <span>Total payable</span>
+                <strong id="loan-total">—</strong>
+              </div>
+            </div>
+            <div class="split" aria-hidden="true">
+              <div class="split-bar">
+                <span id="loan-principal-bar"></span>
+              </div>
+              <div class="split-legend">
+                <span>Principal</span>
+                <span>Interest</span>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
